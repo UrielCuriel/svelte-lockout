@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.1...v1.0.2) (2023-01-27)
+
+
+### Bug Fixes
+
+* update pnpm-lock.yaml ([4f494c7](https://github.com/UrielCuriel/svelte-lookout/commit/4f494c7bc345c504fddc2d6d4c2b268e39b8e11b))
+
 ## [1.0.1](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.0...v1.0.1) (2023-01-27)
 
 
