@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.0...v1.0.1) (2023-01-27)
+
+
+### Miscellaneous Chores
+
+* release 1.0.1 ([fdf6513](https://github.com/UrielCuriel/svelte-lookout/commit/fdf6513a65c1dcdc7cb3b90722d091473370177e))
+
 ## 1.0.0 (2023-01-27)
 
 
