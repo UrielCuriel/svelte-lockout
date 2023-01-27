@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/UrielCuriel/svelte-lookout/compare/v1.1.0...v1.1.1) (2023-01-27)
+
+
+### Bug Fixes
+
+* add missing dependency ([a38120c](https://github.com/UrielCuriel/svelte-lookout/commit/a38120c82d9a42ecf76f440df1844d991de2e0a8))
+
 ## [1.1.0](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.2...v1.1.0) (2023-01-27)
 
 
