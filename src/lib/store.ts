@@ -241,5 +241,7 @@ export const orientationWatcher = derived(watcher, ($watcher) => {
 });
 
 export const devicePixelRatioWatcher = derived(watcher, ($watcher) => {
-	return $watcher.devicePixelRatio;
+	return {
+		devicePixelRatio: $watcher.devicePixelRatio
+	};
 });

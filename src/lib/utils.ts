@@ -44,7 +44,7 @@ export const diff = (arr: any[]): any => {
 };
 
 /**
- * function to check if is runing on browser
+ * function to check if is running on browser
  */
 export const browser = () => {
 	try {

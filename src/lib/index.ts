@@ -1,17 +1,3 @@
-import {
-	mouseWatcher,
-	scrollWatcher,
-	sizeWatcher,
-	windowWatcher,
-	devicePixelRatioWatcher,
-	orientationWatcher
-} from './store';
+import { mouseWatcher, scrollWatcher, sizeWatcher, windowWatcher, devicePixelRatioWatcher, orientationWatcher } from './store';
 
-export {
-	mouseWatcher,
-	scrollWatcher,
-	sizeWatcher,
-	windowWatcher,
-	devicePixelRatioWatcher,
-	orientationWatcher
-};
+export { mouseWatcher, scrollWatcher, sizeWatcher, windowWatcher, devicePixelRatioWatcher, orientationWatcher };

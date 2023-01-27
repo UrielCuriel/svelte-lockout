@@ -2,23 +2,16 @@
 	<nav>
 		<ul class="flex flex-row justify-center items-center">
 			<li class="p-2">
-				<a
-					href="/"
-					class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8"
-					>Home</a
-				>
+				<a href="/" class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8">Home</a>
 			</li>
 			<li class="p-2">
 				<a
 					href="/documentation"
-					class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8"
-					>Documentation</a
+					class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8">Documentation</a
 				>
 			</li>
 			<li class="p-2">
-				<a
-					href="/examples"
-					class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8"
+				<a href="/examples" class="text-white px-2 bg-primary-teal-500 hover:bg-primary-teal-200 hover:text-primary-teal-600  transition-all duration-300 ease-in-out block h-8"
 					>Examples</a
 				>
 			</li>
