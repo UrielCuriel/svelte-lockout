@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.2...v1.1.0) (2023-01-27)
+
+
+### Features
+
+* config deploy to netlify ([410a125](https://github.com/UrielCuriel/svelte-lookout/commit/410a125699219fb9112d141569dda80dd67d04df))
+
 ## [1.0.2](https://github.com/UrielCuriel/svelte-lookout/compare/v1.0.1...v1.0.2) (2023-01-27)
 
 
