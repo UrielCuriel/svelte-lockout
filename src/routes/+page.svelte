@@ -1,27 +1,15 @@
 <script lang="ts">
-	import {
-		mouseWatcher,
-		scrollWatcher,
-		sizeWatcher,
-		windowWatcher,
-		orientationWatcher,
-		devicePixelRatioWatcher
-	} from '$lib/store';
-	import Nav from '../components/nav.svelte';
+	import { mouseWatcher, scrollWatcher, sizeWatcher, windowWatcher, orientationWatcher, devicePixelRatioWatcher } from '$lib/store';
 </script>
 
 <div class=" m-auto px-4">
-	<Nav />
 	<div class="grid md:grid-flow-col grid-flow-row  gap-4 w-full md:w-3/4 xl:w-2/3 m-auto">
 		<div class="text-center">
 			<img src="/logo.svg" alt="SvelteKit" class="w-auto h-72 m-auto" />
 		</div>
 		<div>
 			<h1 class="text-3xl text-primary-500 font-medium">Welcome to svelte lookout</h1>
-			<p class="text-justify">
-				This is a library for "watch" some windows changes like resize mouse move scroll etc using
-				stores an actions for svelte and sveltekit
-			</p>
+			<p class="text-justify">This is a library for "watch" some windows changes like resize mouse move scroll etc using stores an actions for svelte and sveltekit</p>
 		</div>
 	</div>
 	<div class="m-auto w-full md:w-3/4 xl:w-2/3 my-8">
@@ -34,31 +22,25 @@
 	<div class="m-auto w-full md:w-3/4 xl:w-2/3 my-8">
 		<h2 class="text-2xl text-primary-500 font-medium">Watchers (svelte stores)</h2>
 	</div>
-	<div
-		class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-auto w-full md:w-2/3 xl:w-1/2 relative"
-	>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-auto w-full md:w-2/3 xl:w-1/2 relative">
 		<div class="w-full min-w-fit bg-white shadow-md rounded-xl text-center">
-			<i
-				class="fa-light fa-arrow-pointer text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500"
-			/>
+			<i class="fa-light fa-arrow-pointer text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500" />
 
 			<span class="block">Mouse Watcher</span>
 			<div class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left">
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex justify-between">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						<i class="fa-light fa-x" />
 					</span>
-					{$mouseWatcher.x}
+					<span class="px-2">{$mouseWatcher.x}</span>
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex justify-between">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						<i class="fa-light fa-y" />
 					</span>
-					{$mouseWatcher.y}
+					<span class="px-2">{$mouseWatcher.y}</span>
 				</div>
-				<div
-					class="bg-primary-teal-100 rounded-xl overflow-hidden h-6 flex gap-1 align-middle items-center"
-				>
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden h-6 flex gap-1 align-middle items-center">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						{#if $mouseWatcher.velocity.x < 0}
 							<i class="fa-light fa-angles-left" />
@@ -71,9 +53,7 @@
 
 					<span>{Math.abs($mouseWatcher.velocity.x)}</span>
 				</div>
-				<div
-					class="bg-primary-teal-100 rounded-xl overflow-hidden h-6 flex gap-3 align-middle items-center"
-				>
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden h-6 flex gap-3 align-middle items-center">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						{#if $mouseWatcher.velocity.y < 0}
 							<i class="fa-light fa-angles-up" />
@@ -88,37 +68,31 @@
 			</div>
 		</div>
 		<div class="w-full min-w-fit bg-white shadow-md rounded-xl text-center">
-			<i
-				class="fa-light fa-computer-mouse-scrollwheel text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500"
-			/>
+			<i class="fa-light fa-computer-mouse-scrollwheel text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500" />
 
 			<span class="block">Scroll Watcher</span>
 			<div class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left">
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
-					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"
-						><i class="fa-light fa-border-top" /></span
-					>
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex">
+					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"><i class="fa-light fa-border-top" /></span>
 					{$scrollWatcher.top}
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
-					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"
-						><i class="fa-light fa-border-bottom" /></span
-					>
-					{$scrollWatcher.bottom}
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex justify-between">
+					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"><i class="fa-light fa-border-bottom" /></span>
+					<span class="px-2">{$scrollWatcher.bottom}</span>
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						<i class="fa-light fa-border-left" />
 					</span>
 					{$scrollWatcher.left}
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						<i class="fa-light fa-border-right" />
 					</span>
 					{$scrollWatcher.right}
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						{#if $scrollWatcher.velocity.x < 0}
 							<i class="fa-light fa-angles-left" />
@@ -130,7 +104,7 @@
 					</span>
 					{$scrollWatcher.velocity.x}
 				</div>
-				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
+				<div class="bg-primary-teal-100 rounded-xl overflow-hidden flex">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						{#if $scrollWatcher.velocity.y < 0}
 							<i class="fa-light fa-angles-up" />
@@ -145,9 +119,7 @@
 			</div>
 		</div>
 		<div class="w-full min-w-fit bg-white shadow-md rounded-xl text-center">
-			<i
-				class="fa-light fa-arrows-maximize text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500"
-			/>
+			<i class="fa-light fa-arrows-maximize text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500" />
 			<span class="block">Size Watcher</span>
 			<div class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left">
 				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
@@ -175,15 +147,11 @@
 			<span class="block">Window Watcher</span>
 			<div class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left">
 				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
-					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"
-						><i class="fa-light fa-border-top" /></span
-					>
+					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"><i class="fa-light fa-border-top" /></span>
 					{$windowWatcher.top}
 				</div>
 				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
-					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"
-						><i class="fa-light fa-border-bottom" /></span
-					>
+					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block"><i class="fa-light fa-border-bottom" /></span>
 					{$windowWatcher.bottom}
 				</div>
 				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
@@ -260,14 +228,12 @@
 		<div class="w-full min-h-fit bg-white shadow-md rounded-xl text-center">
 			<i class="fa-sharp fa-percent text-10xl p-8 text-center mx-auto mt-4 text-primary-teal-500" />
 			<span class="block">Pixel Ratio Watcher</span>
-			<div
-				class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left justify-center items-center align-middle"
-			>
+			<div class="grid grid-cols-2 p-4 gap-x-8 gap-y-2 text-left justify-center items-center align-middle">
 				<div class="bg-primary-teal-100 rounded-xl overflow-hidden">
 					<span class="text-center bg-primary-teal-500 text-white w-10 inline-block">
 						<i class="fa-light fa-border-left" />
 					</span>
-					{$devicePixelRatioWatcher}
+					{$devicePixelRatioWatcher.devicePixelRatio}
 				</div>
 			</div>
 		</div>
