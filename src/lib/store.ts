@@ -55,64 +55,76 @@ const updateWatcher = (data: lookoutWatcher) => {
 	if (data.mouseVelocityXBuffer.length > 5) {
 		data.mouseVelocityXBuffer.shift();
 	}
-	data.mouseVelocityXBuffer.push(diff(data.mouseX));
-	data.mouseVelocityX = mean(data.mouseVelocityXBuffer);
+	if (last(data.mouseVelocityXBuffer) !== diff(data.mouseX)) {
+		data.mouseVelocityXBuffer.push(diff(data.mouseX));
+		data.mouseVelocityX = mean(data.mouseVelocityXBuffer);
+	}
 	if (data.mouseVelocityYBuffer.length > 5) {
 		data.mouseVelocityYBuffer.shift();
 	}
-	data.mouseVelocityYBuffer.push(diff(data.mouseY));
-	data.mouseVelocityY = mean(data.mouseVelocityYBuffer);
+	if (last(data.mouseVelocityYBuffer) !== diff(data.mouseY)) {
+		data.mouseVelocityYBuffer.push(diff(data.mouseY));
+		data.mouseVelocityY = mean(data.mouseVelocityYBuffer);
+	}
 	if (data.mouseX.length >= 2) {
 		data.mouseX.shift();
 	}
-	data.mouseX.push(last(data.mouseX));
+	if (last(data.mouseX) !== data.mouseX[0]) data.mouseX.push(last(data.mouseX));
 	if (data.mouseY.length >= 2) {
 		data.mouseY.shift();
 	}
-	data.mouseY.push(last(data.mouseY));
+	if (last(data.mouseY) !== data.mouseY[0]) data.mouseY.push(last(data.mouseY));
 
 	//check scroll movement
 	if (data.x.length >= 2) {
 		data.x.shift();
 	}
-	data.x.push(window.scrollX);
+	if (last(data.x) !== window.scrollX) data.x.push(window.scrollX);
 	if (data.y.length >= 2) {
 		data.y.shift();
 	}
-	data.y.push(window.scrollY);
+	if (last(data.y) !== window.scrollY) data.y.push(window.scrollY);
 
 	if (data.scrollVelocityXBuffer.length > 5) {
 		data.scrollVelocityXBuffer.shift();
 	}
-	data.scrollVelocityXBuffer.push(diff(data.x));
-	data.scrollVelocityX = mean(data.scrollVelocityXBuffer);
+	if (last(data.scrollVelocityXBuffer) !== diff(data.x)) {
+		data.scrollVelocityXBuffer.push(diff(data.x));
+		data.scrollVelocityX = mean(data.scrollVelocityXBuffer);
+	}
 	if (data.scrollVelocityYBuffer.length > 5) {
 		data.scrollVelocityYBuffer.shift();
 	}
-	data.scrollVelocityYBuffer.push(diff(data.y));
-	data.scrollVelocityY = mean(data.scrollVelocityYBuffer);
+	if (last(data.scrollVelocityYBuffer) !== diff(data.y)) {
+		data.scrollVelocityYBuffer.push(diff(data.y));
+		data.scrollVelocityY = mean(data.scrollVelocityYBuffer);
+	}
 
 	//windows position
 	if (data.windowX.length >= 2) {
 		data.windowX.shift();
 	}
-	data.windowX.push(window.screenX);
+	if (last(data.windowX) !== window.screenX) data.windowX.push(window.screenX);
 	if (data.windowY.length >= 2) {
 		data.windowY.shift();
 	}
-	data.windowY.push(window.screenY);
+	if (last(data.windowY) !== window.screenY) data.windowY.push(window.screenY);
 
 	if (data.windowVelocityXBuffer.length > 5) {
 		data.windowVelocityXBuffer.shift();
 	}
-	data.windowVelocityXBuffer.push(diff(data.windowX));
-	data.windowVelocityX = mean(data.windowVelocityXBuffer);
+	if (last(data.windowVelocityXBuffer) !== diff(data.windowX)) {
+		data.windowVelocityXBuffer.push(diff(data.windowX));
+		data.windowVelocityX = mean(data.windowVelocityXBuffer);
+	}
 
 	if (data.windowVelocityYBuffer.length > 5) {
 		data.windowVelocityYBuffer.shift();
 	}
-	data.windowVelocityYBuffer.push(diff(data.windowY));
-	data.windowVelocityY = mean(data.windowVelocityYBuffer);
+	if (last(data.windowVelocityYBuffer) !== diff(data.windowY)) {
+		data.windowVelocityYBuffer.push(diff(data.windowY));
+		data.windowVelocityY = mean(data.windowVelocityYBuffer);
+	}
 
 	return data;
 };
@@ -130,19 +142,22 @@ const mouseHandler = delay(75, (event: MouseEvent, data: lookoutWatcher) => {
 	if (data.mouseX.length >= 2) {
 		data.mouseX.shift();
 	}
-	data.mouseX.push(event.clientX);
+	if (last(data.mouseX) !== event.clientX) data.mouseX.push(event.clientX);
+
 	if (data.mouseY.length >= 2) {
 		data.mouseY.shift();
 	}
-	data.mouseY.push(event.clientY);
+	if (last(data.mouseY) !== event.clientY) data.mouseY.push(event.clientY);
+
 	return data;
 });
 
 const resizeHandler = delay(110, (event: UIEvent, data: lookoutWatcher) => {
-	data.width = window.innerWidth;
-	data.height = window.innerHeight;
-	data.scrollHeight = document.body.scrollHeight;
-	data.devicePixelRatio = Math.max(window.devicePixelRatio || 1.0, 1.0);
+	//update only if the size has changed
+	if (data.width !== window.innerWidth) data.width = window.innerWidth;
+	if (data.height !== window.innerHeight) data.height = window.innerHeight;
+	if (data.scrollHeight !== document.body.scrollHeight) data.scrollHeight = document.body.scrollHeight;
+	if (data.devicePixelRatio !== Math.max(window.devicePixelRatio || 1.0, 1.0)) data.devicePixelRatio = Math.max(window.devicePixelRatio || 1.0, 1.0);
 	return data;
 });
 
@@ -150,15 +165,17 @@ const orientationHandler = delay(110, (event: DeviceOrientationEvent, data: look
 	if (data.alpha.length >= 2) {
 		data.alpha.shift();
 	}
-	data.alpha.push(event.alpha ?? 0);
+	if (last(data.alpha) !== event.alpha) data.alpha.push(event.alpha ?? 0);
+
 	if (data.beta.length >= 2) {
 		data.beta.shift();
 	}
-	data.beta.push(event.beta ?? 0);
+	if (last(data.beta) !== event.beta) data.beta.push(event.beta ?? 0);
+
 	if (data.gamma.length >= 2) {
 		data.gamma.shift();
 	}
-	data.gamma.push(event.gamma ?? 0);
+	if (last(data.gamma) !== event.gamma) data.gamma.push(event.gamma ?? 0);
 	return data;
 });
 
@@ -188,6 +205,8 @@ function createWatcherStore() {
 export const watcher = createWatcherStore();
 
 export const mouseWatcher = derived(watcher, ($watcher) => {
+	//return only if the values have changed
+
 	return {
 		x: Math.floor(last($watcher.mouseX)),
 		y: Math.floor(last($watcher.mouseY)),
