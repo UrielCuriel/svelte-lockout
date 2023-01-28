@@ -55,76 +55,70 @@ const updateWatcher = (data: lookoutWatcher) => {
 	if (data.mouseVelocityXBuffer.length > 5) {
 		data.mouseVelocityXBuffer.shift();
 	}
-	if (last(data.mouseVelocityXBuffer) !== diff(data.mouseX)) {
-		data.mouseVelocityXBuffer.push(diff(data.mouseX));
-		data.mouseVelocityX = mean(data.mouseVelocityXBuffer);
-	}
+
+	data.mouseVelocityXBuffer.push(diff(data.mouseX));
+	data.mouseVelocityX = mean(data.mouseVelocityXBuffer);
+
 	if (data.mouseVelocityYBuffer.length > 5) {
 		data.mouseVelocityYBuffer.shift();
 	}
-	if (last(data.mouseVelocityYBuffer) !== diff(data.mouseY)) {
-		data.mouseVelocityYBuffer.push(diff(data.mouseY));
-		data.mouseVelocityY = mean(data.mouseVelocityYBuffer);
-	}
+
+	data.mouseVelocityYBuffer.push(diff(data.mouseY));
+	data.mouseVelocityY = mean(data.mouseVelocityYBuffer);
+
 	if (data.mouseX.length >= 2) {
 		data.mouseX.shift();
 	}
-	if (last(data.mouseX) !== data.mouseX[0]) data.mouseX.push(last(data.mouseX));
+	data.mouseX.push(last(data.mouseX));
 	if (data.mouseY.length >= 2) {
 		data.mouseY.shift();
 	}
-	if (last(data.mouseY) !== data.mouseY[0]) data.mouseY.push(last(data.mouseY));
+	data.mouseY.push(last(data.mouseY));
 
 	//check scroll movement
 	if (data.x.length >= 2) {
 		data.x.shift();
 	}
-	if (last(data.x) !== window.scrollX) data.x.push(window.scrollX);
+	data.x.push(window.scrollX);
 	if (data.y.length >= 2) {
 		data.y.shift();
 	}
-	if (last(data.y) !== window.scrollY) data.y.push(window.scrollY);
+	data.y.push(window.scrollY);
 
 	if (data.scrollVelocityXBuffer.length > 5) {
 		data.scrollVelocityXBuffer.shift();
 	}
-	if (last(data.scrollVelocityXBuffer) !== diff(data.x)) {
-		data.scrollVelocityXBuffer.push(diff(data.x));
-		data.scrollVelocityX = mean(data.scrollVelocityXBuffer);
-	}
+	data.scrollVelocityXBuffer.push(diff(data.x));
+	data.scrollVelocityX = mean(data.scrollVelocityXBuffer);
+
 	if (data.scrollVelocityYBuffer.length > 5) {
 		data.scrollVelocityYBuffer.shift();
 	}
-	if (last(data.scrollVelocityYBuffer) !== diff(data.y)) {
-		data.scrollVelocityYBuffer.push(diff(data.y));
-		data.scrollVelocityY = mean(data.scrollVelocityYBuffer);
-	}
+	data.scrollVelocityYBuffer.push(diff(data.y));
+	data.scrollVelocityY = mean(data.scrollVelocityYBuffer);
 
 	//windows position
 	if (data.windowX.length >= 2) {
 		data.windowX.shift();
 	}
-	if (last(data.windowX) !== window.screenX) data.windowX.push(window.screenX);
+	data.windowX.push(window.screenX);
 	if (data.windowY.length >= 2) {
 		data.windowY.shift();
 	}
-	if (last(data.windowY) !== window.screenY) data.windowY.push(window.screenY);
+	data.windowY.push(window.screenY);
 
 	if (data.windowVelocityXBuffer.length > 5) {
 		data.windowVelocityXBuffer.shift();
 	}
-	if (last(data.windowVelocityXBuffer) !== diff(data.windowX)) {
-		data.windowVelocityXBuffer.push(diff(data.windowX));
-		data.windowVelocityX = mean(data.windowVelocityXBuffer);
-	}
+	data.windowVelocityXBuffer.push(diff(data.windowX));
+	data.windowVelocityX = mean(data.windowVelocityXBuffer);
 
 	if (data.windowVelocityYBuffer.length > 5) {
 		data.windowVelocityYBuffer.shift();
 	}
-	if (last(data.windowVelocityYBuffer) !== diff(data.windowY)) {
-		data.windowVelocityYBuffer.push(diff(data.windowY));
-		data.windowVelocityY = mean(data.windowVelocityYBuffer);
-	}
+
+	data.windowVelocityYBuffer.push(diff(data.windowY));
+	data.windowVelocityY = mean(data.windowVelocityYBuffer);
 
 	return data;
 };
@@ -142,12 +136,12 @@ const mouseHandler = delay(75, (event: MouseEvent, data: lookoutWatcher) => {
 	if (data.mouseX.length >= 2) {
 		data.mouseX.shift();
 	}
-	if (last(data.mouseX) !== event.clientX) data.mouseX.push(event.clientX);
+	data.mouseX.push(event.clientX);
 
 	if (data.mouseY.length >= 2) {
 		data.mouseY.shift();
 	}
-	if (last(data.mouseY) !== event.clientY) data.mouseY.push(event.clientY);
+	data.mouseY.push(event.clientY);
 
 	return data;
 });
@@ -165,17 +159,18 @@ const orientationHandler = delay(110, (event: DeviceOrientationEvent, data: look
 	if (data.alpha.length >= 2) {
 		data.alpha.shift();
 	}
-	if (last(data.alpha) !== event.alpha) data.alpha.push(event.alpha ?? 0);
+	data.alpha.push(event.alpha ?? 0);
 
 	if (data.beta.length >= 2) {
 		data.beta.shift();
 	}
-	if (last(data.beta) !== event.beta) data.beta.push(event.beta ?? 0);
+	data.beta.push(event.beta ?? 0);
 
 	if (data.gamma.length >= 2) {
 		data.gamma.shift();
 	}
-	if (last(data.gamma) !== event.gamma) data.gamma.push(event.gamma ?? 0);
+	data.gamma.push(event.gamma ?? 0);
+
 	return data;
 });
 
