@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/UrielCuriel/svelte-lookout/compare/v1.1.1...v1.1.2) (2023-01-28)
+
+
+### Bug Fixes
+
+* values ([280ed8c](https://github.com/UrielCuriel/svelte-lookout/commit/280ed8cd6edf0b748c86db4effa9415e3c5f522b))
+
 ## [1.1.1](https://github.com/UrielCuriel/svelte-lookout/compare/v1.1.0...v1.1.1) (2023-01-28)
 
 
