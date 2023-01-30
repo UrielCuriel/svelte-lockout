@@ -1,5 +1,5 @@
 import { derived, readable, writable } from 'svelte/store';
-import type { lookoutWatcher } from './types';
+import type { DevicePixelRatioWatcher, lookoutWatcher, MouseWatcher, OrientationWatcher, ScrollWatcher, SizeWatcher, WindowWatcher } from './types';
 import { browser, delay, diff, last, mean } from './utils';
 
 const INITIAL_STATE: lookoutWatcher = {
@@ -199,63 +199,170 @@ function createWatcherStore() {
 
 export const watcher = createWatcherStore();
 
-export const mouseWatcher = derived(watcher, ($watcher) => {
-	//return only if the values have changed
-
-	return {
-		x: Math.floor(last($watcher.mouseX)),
-		y: Math.floor(last($watcher.mouseY)),
+const createMouseWatcher = () => {
+	let lastMouseWatcher: MouseWatcher = {
+		x: 0,
+		y: 0,
 		velocity: {
-			x: Math.floor($watcher.mouseVelocityX),
-			y: Math.floor($watcher.mouseVelocityY)
+			x: 0,
+			y: 0
 		}
 	};
-});
+	const { subscribe, set } = writable<MouseWatcher>(lastMouseWatcher);
 
-export const scrollWatcher = derived(watcher, ($watcher) => {
+	watcher.subscribe((data) => {
+		const currentMouseWatcher = {
+			x: Math.floor(last(data.mouseX)),
+			y: Math.floor(last(data.mouseY)),
+			velocity: {
+				x: Math.floor(data.mouseVelocityX),
+				y: Math.floor(data.mouseVelocityY)
+			}
+		};
+		//compare all entries of current mouse with last mouse to see if it has changed
+		if (JSON.stringify(currentMouseWatcher) === JSON.stringify(lastMouseWatcher)) return;
+		lastMouseWatcher = currentMouseWatcher;
+		set(currentMouseWatcher);
+	});
 	return {
-		left: Math.floor(last($watcher.x)),
-		right: Math.floor(last($watcher.x) + $watcher.width),
-		top: Math.floor(last($watcher.y)),
-		bottom: Math.floor(last($watcher.y) + $watcher.height),
+		subscribe
+	};
+};
+
+export const mouseWatcher = createMouseWatcher();
+
+const createScrollWatcher = () => {
+	let lastScrollWatcher: ScrollWatcher = {
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
 		velocity: {
-			x: Math.floor($watcher.scrollVelocityX),
-			y: Math.floor($watcher.scrollVelocityY)
+			x: 0,
+			y: 0
 		}
 	};
-});
+	const { subscribe, set } = writable<ScrollWatcher>(lastScrollWatcher);
 
-export const sizeWatcher = derived(watcher, ($watcher) => {
-	return {
-		width: $watcher.width,
-		height: $watcher.height,
-		docH: $watcher.scrollHeight
+	watcher.subscribe((data) => {
+		const currentScrollWatcher = {
+			left: Math.floor(last(data.x)),
+			right: Math.floor(last(data.x) + data.width),
+			top: Math.floor(last(data.y)),
+			bottom: Math.floor(last(data.y) + data.height),
+			velocity: {
+				x: Math.floor(data.scrollVelocityX),
+				y: Math.floor(data.scrollVelocityY)
+			}
+		};
+		//compare all entries of current scroll with last scroll to see if it has changed
+		if (JSON.stringify(currentScrollWatcher) === JSON.stringify(lastScrollWatcher)) return;
+		lastScrollWatcher = currentScrollWatcher;
+		set(lastScrollWatcher);
+	});
+	return { subscribe };
+};
+
+export const scrollWatcher = createScrollWatcher();
+
+const createSizeWatcher = () => {
+	let lastSizeWatcher: SizeWatcher = {
+		width: 0,
+		height: 0,
+		docH: 0
 	};
-});
+	const { subscribe, set } = writable<SizeWatcher>(lastSizeWatcher);
 
-export const windowWatcher = derived(watcher, ($watcher) => {
-	return {
-		left: Math.floor(last($watcher.windowX)),
-		right: Math.floor(last($watcher.windowX) + $watcher.width),
-		top: Math.floor(last($watcher.windowY)),
-		bottom: Math.floor(last($watcher.windowY) + $watcher.height),
+	watcher.subscribe((data) => {
+		const currentSizeWatcher = {
+			width: data.width,
+			height: data.height,
+			docH: data.scrollHeight
+		};
+		//compare all entries of current size with last size to see if it has changed
+		if (JSON.stringify(currentSizeWatcher) === JSON.stringify(lastSizeWatcher)) return;
+		lastSizeWatcher = currentSizeWatcher;
+		set(lastSizeWatcher);
+	});
+	return { subscribe };
+};
+
+export const sizeWatcher = createSizeWatcher();
+
+const createWindowWatcher = () => {
+	let lastWindowWatcher: WindowWatcher = {
+		left: 0,
+		right: 0,
+		top: 0,
+		bottom: 0,
 		velocity: {
-			x: Math.floor($watcher.windowVelocityX),
-			y: Math.floor($watcher.windowVelocityY)
+			x: 0,
+			y: 0
 		}
 	};
-});
+	const { subscribe, set } = writable<WindowWatcher>(lastWindowWatcher);
 
-export const orientationWatcher = derived(watcher, ($watcher) => {
-	return {
-		alpha: Math.floor(last($watcher.alpha)),
-		beta: Math.floor(last($watcher.beta)),
-		gamma: Math.floor(last($watcher.gamma))
-	};
-});
+	watcher.subscribe((data) => {
+		const currentWindowWatcher = {
+			left: Math.floor(last(data.windowX)),
+			right: Math.floor(last(data.windowX) + data.width),
+			top: Math.floor(last(data.windowY)),
+			bottom: Math.floor(last(data.windowY) + data.height),
+			velocity: {
+				x: Math.floor(data.windowVelocityX),
+				y: Math.floor(data.windowVelocityY)
+			}
+		};
+		//compare all entries of current window with last window to see if it has changed
+		if (JSON.stringify(currentWindowWatcher) === JSON.stringify(lastWindowWatcher)) return;
+		lastWindowWatcher = currentWindowWatcher;
+		set(lastWindowWatcher);
+	});
+	return { subscribe };
+};
 
-export const devicePixelRatioWatcher = derived(watcher, ($watcher) => {
-	return {
-		devicePixelRatio: $watcher.devicePixelRatio
+export const windowWatcher = createWindowWatcher();
+
+const createOrientationWatcher = () => {
+	let lastOrientationWatcher: OrientationWatcher = {
+		alpha: 0,
+		beta: 0,
+		gamma: 0
 	};
-});
+	const { subscribe, set } = writable<OrientationWatcher>(lastOrientationWatcher);
+
+	watcher.subscribe((data) => {
+		const currentOrientationWatcher = {
+			alpha: Math.floor(last(data.alpha)),
+			beta: Math.floor(last(data.beta)),
+			gamma: Math.floor(last(data.gamma))
+		};
+		//compare all entries of current orientation with last orientation to see if it has changed
+		if (JSON.stringify(currentOrientationWatcher) === JSON.stringify(lastOrientationWatcher)) return;
+		lastOrientationWatcher = currentOrientationWatcher;
+		set(lastOrientationWatcher);
+	});
+	return { subscribe };
+};
+
+export const orientationWatcher = createOrientationWatcher();
+
+const createDevicePixelRatioWatcher = () => {
+	let lastDevicePixelRatioWatcher: DevicePixelRatioWatcher = {
+		devicePixelRatio: 0
+	};
+	const { subscribe, set } = writable<DevicePixelRatioWatcher>(lastDevicePixelRatioWatcher);
+
+	watcher.subscribe((data) => {
+		const currentDevicePixelRatioWatcher = {
+			devicePixelRatio: data.devicePixelRatio
+		};
+		//compare all entries of current devicePixelRatio with last devicePixelRatio to see if it has changed
+		if (JSON.stringify(currentDevicePixelRatioWatcher) === JSON.stringify(lastDevicePixelRatioWatcher)) return;
+		lastDevicePixelRatioWatcher = currentDevicePixelRatioWatcher;
+		set(lastDevicePixelRatioWatcher);
+	});
+	return { subscribe };
+};
+
+export const devicePixelRatioWatcher = createDevicePixelRatioWatcher();
