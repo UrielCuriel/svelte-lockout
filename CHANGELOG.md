@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/UrielCuriel/svelte-lookout/compare/v1.1.2...v1.1.3) (2023-01-30)
+
+
+### Performance Improvements
+
+* improve performance of all watchers ([33de897](https://github.com/UrielCuriel/svelte-lookout/commit/33de8979e8787ff81574702235bda195ccd603b8))
+
 ## [1.1.2](https://github.com/UrielCuriel/svelte-lookout/compare/v1.1.1...v1.1.2) (2023-01-28)
 
 
