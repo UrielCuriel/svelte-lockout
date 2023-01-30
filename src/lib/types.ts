@@ -28,3 +28,50 @@ export type lookoutWatcher = {
 	scrollVelocityX: number;
 	scrollVelocityY: number;
 };
+
+export type MouseWatcher = {
+	x: number;
+	y: number;
+	velocity: {
+		x: number;
+		y: number;
+	};
+};
+
+export type ScrollWatcher = {
+	left: number;
+	right: number;
+	top: number;
+	bottom: number;
+	velocity: {
+		x: number;
+		y: number;
+	};
+};
+
+export type SizeWatcher = {
+	width: number;
+	height: number;
+	docH: number;
+};
+
+export type WindowWatcher = {
+	left: number;
+	right: number;
+	top: number;
+	bottom: number;
+	velocity: {
+		x: number;
+		y: number;
+	};
+};
+
+export type OrientationWatcher = {
+	alpha: number;
+	beta: number;
+	gamma: number;
+};
+
+export type DevicePixelRatioWatcher = {
+	devicePixelRatio: number;
+};
